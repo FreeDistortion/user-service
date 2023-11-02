@@ -1,0 +1,29 @@
+server:
+  # random port
+  port: 0
+
+spring:
+  application:
+    name: userservice
+
+eureka:
+  client:
+    register-with-eureka: true
+    # eureka server??? instance ??? ????? ??? ??? ???? ??
+    # true? ??? ??? ????? ??
+    fetch-registry: true
+
+    # server ?? ??
+    service-url:
+#      defaultZone: http://192.168.0.114:8761/eureka
+      defaultZone: http://192.168.0.5:8761/eureka
+#      defaultZone: http://localhost:8761/eureka
+
+  instance:
+    instance-id: ${spring.cloud.client.hostname}:${spring.application.instance_id:${random.value}}
+
+    # client? eureka? ??? ??, ??? ??(?) ?? heartbeat ??
+    lease-renewal-interval-in-seconds: 1
+
+    # ??? ??(?) ?? heartbeat? ?? ? ?? instance? registry?? ??
+    lease-expiration-duration-in-seconds: 2
